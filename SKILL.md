@@ -183,7 +183,7 @@ START_product_shape
     <group_size_four TYPE="слова-участника" STATUS="проверено" PRIMACY="первичная" VALIDITY="условие: состав не менялся">
       annotation: «едем вчетвером»; участник А.; чат; 06.10.2026; подтверждено участником Б.
     </group_size_four>
-    <hut_phone_booking TYPE="факт" STATUS="проверено" PRIMACY="вторичная" ORIGIN="https://travel-blog.example/hut" ARTIFACT="data-fold-weekend-route/art-002-hut-blog.md">
+    <hut_phone_booking TYPE="факт" STATUS="проверено" PRIMACY="вторичная" VALIDITY="условие: политика приюта не менялась" ORIGIN="https://travel-blog.example/hut" ARTIFACT="data-fold-weekend-route/art-002-hut-blog.md">
       annotation: приют принимает бронь по телефону; заметка путешественника; 05.10.2026; первоисточник — сайт приюта, не достигнут
     </hut_phone_booking>
   </verified>
