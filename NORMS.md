@@ -134,4 +134,4 @@
 ## Глобальные
 100. Frontmatter: name=data-fold; description = триггер (уникальный глагол + продукт + домен).
 101. Блоки PCAM: goal/task/environment/working_patterns/tactical_freedom/completion_criteria, fencing парными тегами.
-102. Out-of-scope (зафиксировано решением): аудитория продукта и now/will-дельта — жанр следующей стадии, не data-fold.
+102. Out-of-scope (зафиксировано решением, носитель — история git, коммит 04011b4, НЕ текст SKILL.md): аудитория продукта и now/will-дельта — жанр следующей стадии, не data-fold. Носителей в файле не имеет by design; проверке перевода не подлежит.
