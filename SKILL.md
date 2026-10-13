@@ -26,7 +26,7 @@ Input. The cycle is started by a delta: information without status, a question w
 
 Action. Declared by the human at entry; it sets the initial composition of the demand registry and unfolds through the question "what must be known to act?". An undeclared action is the first blocking question. Refinement is human-owned — self-declared or confirming the executor's proposal: the refined action supersedes the old one with a supersedes edge in the same vector; the registry re-unfolds; verified data is inherited. The action is always singular; a composite decomposes — replacement within the vector or a new task with its own directory.
 
-State. A graph of units, links, operations and demand (form in state_shape); it lives within the task, after it only the product matters. While demand is small the graph lives in dialogue; it materializes into a file when links grow or the task crosses a session; materialization moves the graph whole — one reality, the file is its record. Data from past tasks enters only through regular intake, as new units.
+State. A graph of units, links, operations and demand (form in state_shape); it lives within the task, after it only the product matters. The graph lives in a draft file, not in dialogue: the first intake creates data-draft-<slug>.xml, every cycle pass rewrites it whole — the current state is always on disk, a dead session loses no graph. One reality, the file is its record. Data from past tasks enters only through regular intake, as new units.
 END_task
 
 START_environment
@@ -206,7 +206,7 @@ END_working_patterns
 
 START_tactical_freedom
 ### Tactical Freedom
-Local decisions belong to the executor; the list is not exhaustive: check depth and order, question form, the moment of graph materialization, dialogue manner, number of attempts. Boundaries: protocols bind, guides advise.
+Local decisions belong to the executor; the list is not exhaustive: check depth and order, question form, dialogue manner, number of attempts. Boundaries: protocols bind, guides advise.
 END_tactical_freedom
 
 START_completion_criteria
