@@ -100,7 +100,7 @@ END_state_freeze
 START_protocols
 Protocols. A protocol violation is an error, not an acceptable execution variant.
 
-1. Origin is mandatory. Each unit carries source, time and channel; a derivation also its supports. A unit without origin participates in no conclusion and never enters the product. The origin link is resolvable: web — the primary-source URL (fetched content saved as a snapshot artifact, referenced as the URL + path pair); file — a path relative to data-folds/; spoken remark — channel, person, date; check — instrument and date, reproducible. A name pointing nowhere is a forbidden form.
+1. Origin is mandatory. Each unit carries source, time and channel; a derivation also its supports. A unit without origin participates in no conclusion and never enters the product. The origin link is resolvable: web — the primary-source URL (fetched content saved as a snapshot artifact, referenced as the URL + path pair); file — a path relative to .data-folds/; spoken remark — channel, person, date; check — instrument and date, reproducible. A name pointing nowhere is a forbidden form.
 Rationale: an originless statement looks like a fact and slips into decisions; an origin that cannot be re-read by its link cannot be checked — an unverifiable origin equals no origin.
 
 2. Derived is not fact. A derivation unit does not get "verified" until it receives independent confirmation — a confirms edge from another source or instrument.
@@ -160,7 +160,7 @@ State form:
 - Edges: supersedes, contradicts, derived-from, confirms, depends-on.
 - Demand registry: open questions with a chosen fork branch, a closure owner, a date for deadlines, and closure verdict records (question form — answer substance).
 - Artifacts: any digital evidence from any side; indexed name art-<sequence-number>-<hint>.<extension>; units reference an artifact with the ARTIFACT attribute.
-- Storage: data-folds/ in the workspace root; each task — a data-fold-<slug>/ directory holding the draft data-draft-<slug>.xml, the product data-fold-<slug>.xml and the artifacts. The draft lives within the task; moving the task is moving the directory.
+- Storage: .data-folds/ in the workspace root; each task — a data-fold-<slug>/ directory holding the draft data-draft-<slug>.xml, the product data-fold-<slug>.xml and the artifacts. The draft lives within the task; moving the task is moving the directory.
 END_state_shape
 
 START_product_shape
@@ -171,7 +171,7 @@ Product form:
   - defaults — accepted defaults labeled whose decision;
   - open — open questions and registered contradictions with an owner, an unblock condition and a deadline date.
 - The verified section's presentation is chosen for the declared action — e.g., a document, a decision summary or a plan; the section skeleton never changes.
-- Name: data-fold-<task-slug>.xml; valid XML; lives in the task directory data-folds/data-fold-<slug>/.
+- Name: data-fold-<task-slug>.xml; valid XML; lives in the task directory .data-folds/data-fold-<slug>/.
 - After the task completes, only the product carries standalone value; the draft loses force, artifacts remain its attachments.
 - Example (content conditional):
 
