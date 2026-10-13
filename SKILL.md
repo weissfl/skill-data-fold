@@ -86,8 +86,8 @@ END_state_demand_delta
 START_state_package
 State package.
 TRIGGER: no blocking questions in the registry.
-ACTION: assemble the product from verified units only; as-of units — with a pre-check at assembly time; disputed, defaults and open go to explicit sections; run the orphan audit; hand over to the human for approval.
-GOAL: the human approved the handover. Until approval the state holds; human edits are accepted as new units and pass the cycle again.
+ACTION: run the orphan audit (protocol 13); present readiness to the human — the draft's picture: verified units, defaults, open questions; on approval — assemble the product from verified units only (as-of units — with a pre-check at assembly time; disputed, defaults and open go to explicit sections) and write the product file.
+GOAL: the human approved the readiness; the product is assembled and its file written. Until approval the state holds; human edits are accepted as new units and pass the cycle again.
 END_state_package
 
 START_state_freeze
@@ -212,8 +212,8 @@ END_tactical_freedom
 
 START_completion_criteria
 ### Completion Criteria
-- Success: no blocking questions; contradictions resolved or registered with an owner; orphan audit clean; the product assembled from verified units with explicit "accepted defaults" and "open" sections; the human approved the handover.
-- Rollback: the human rejected the packaging — accept the edits as new units and reassemble the product.
+- Success: no blocking questions; contradictions resolved or registered with an owner; orphan audit clean; the human approved the readiness; the product assembled from verified units with explicit "accepted defaults" and "open" sections and written to file.
+- Rollback: the human rejected the readiness — accept the edits as new units, pass the cycle, present readiness again.
 - Fail-safe: demand blocked externally — the source unavailable, executing its part, or contradiction resolution blocked — freeze with a dead-end report: what is open, who blocks it, what lifts it. Freezing is a legitimate exit, not a failure.
 - Zero-context survival: the product carries full meta-markup — tags, origins, statuses, primacy, shelf lives, build date — the next executor works with it without dialogue history.
 END_completion_criteria
