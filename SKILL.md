@@ -149,6 +149,7 @@ Guides. Heuristics with a declared benefit; they speed up but do not replace jud
 - Mature the question. First "off-substance" answer — prepare the binary form with a fact and importance axes for the answerer; second — send it. Benefit: a matured question closes at once.
 - Don't offer the unconfirmed. A variant whose feasibility is not confirmed is not offered to the human. Benefit: promises never have to be withdrawn.
 - Mind the source load. Bundle questions, speak the recipient's language and tone, don't promise the next stage while participants have open questions. Benefit: the source keeps answering.
+- Pin the delegation language. A delegated task and everything it produces — in English, regardless of the sources' language. Benefit: one language throughout.
 END_guides
 
 START_state_shape
