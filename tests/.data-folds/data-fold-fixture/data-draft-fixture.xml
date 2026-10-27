@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_draft TASK="fixture" UPDATED="2026-10-20" CYCLE="7" FINAL="true">
+
+  <action SUPERSEDES="v1: собрать всё подряд (2026-10-19, решение владельца)">Понять, возможен ли маршрут выходного дня с ночёвкой в хижине при группе из четырёх.</action>
+
+  <units>
+    <weather_ok TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="web: https://weather.example/weekend" ARTIFACT="art-001-weather.md">Осадков не прогнозируется; снапшот сохранён при intake.</weather_ok>
+    <group_size_four TYPE="participant-words" STATUS="verified" PRIMACY="primary" ORIGIN="spoken: user, chat, 2026-10-19">Нас четверо.</group_size_four>
+    <hut_phone_ok TYPE="fact" STATUS="verified" PRIMACY="secondary" VALIDITY="до 21.10.2026" ORIGIN="web: https://travel-blog.example/hut" ARTIFACT="art-002-hut.md">Хижина принимает бронь по телефону; записка путешественника.</hut_phone_ok>
+    <hut_owner_reply TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="spoken: person=Смотритель, channel=phone, date=2026-10-20">Смотритель подтвердил бронь по телефону на месте.</hut_owner_reply>
+    <route_derived TYPE="pattern" STATUS="verified" PRIMACY="primary" ORIGIN="web: https://maps.example/route">Вывод: маршрут подъёма по силам группе из четырёх.</route_derived>
+    <fee_changed TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="web: https://park.example/fees" ARTIFACT="art-004-fees.md">Сбор вырос до 20 USD.</fee_changed>
+    <veteran_tip TYPE="fact" STATUS="verified" PRIMACY="secondary" VALIDITY="as-of" ORIGIN="spoken: person=Максим, channel=чат клуба, date=19.10.2026">Совет бывалого: начинать до жары.</veteran_tip>
+    <status_broken TYPE="fact" STATUS="checked" PRIMACY="high" ORIGIN="web: https://example.com/status">Статус вне словаря (см. art-006).</status_broken>
+    <road_closed TYPE="environment_fact" STATUS="unverified" ORIGIN="web: kdmid-example.ru/roads">Говорят, дорога закрыта; сверено с art-009.</road_closed>
+  </units>
+
+  <edges>
+    <edge TYPE="derived-from" FROM="route_derived" TO="weather_ok"/>
+    <edge TYPE="derived-from" FROM="route_derived" TO="group_size_four"/>
+    <edge TYPE="confirms" FROM="hut_owner_reply" TO="hut_phone_ok"/>
+    <edge TYPE="contradicts" FROM="road_closed" TO="route_derived"/>
+    <edge TYPE="supersedes" FROM="new_tag" TO="old_tag"/>
+  </edges>
+
+  <demand_registry>
+    <question id="q1" tag="hut_booking" VERDICT="closed: подтверждено звонком смотрителя" OWNER="executor">Бронь хижины подтверждена.</question>
+    <question id="q2" tag="group_depart" BRANCH="ask-source" OWNER="user" BLOCKING="false" DEADLINE="5 ноября">Кто выезжает первым и когда.</question>
+    <question id="q3" tag="weather_stability" OWNER="executor">Устойчивость погоды к субботе.</question>
+    <question id="q5" tag="road_status" BRANCH="verify-myself" OWNER="user" BLOCKING="true">Проверить статус дороги лично.</question>
+    <question id="q6" tag="parking" OWNER="executor">Парковка у тропы.</question>
+    <status COMPLETE="true" AS_OF="2026-10-21">Готово к сборке.</status>
+  </demand_registry>
+
+  <artifacts>
+    <art id="art-001" path="art-001-weather.md" note="снапшот прогноза"/>
+    <art id="art-002" path="art-002-hut.md" note="записка о хижине"/>
+    <art id="art-004" path="art-004-fees.md" note="страница сборов"/>
+    <art id="art-005" path="art-005-notes.md"/>
+    <art id="art-006" path="snap.txt"/>
+  </artifacts>
+
+</data_draft>

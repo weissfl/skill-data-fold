@@ -1,0 +1,29 @@
+[FAIL] R03 artifacts/art-004: file missing on disk: art-004-fees.md
+[FAIL] R03 artifacts/art-006: file missing on disk: snap.txt
+[FAIL] R04 artifacts/art-006: id/path not in art-<NN>-<hint>.<ext> form: snap.txt
+[WARN] R05 artifacts: numbering gaps: art-003
+[WARN] R06 artifacts/art-005: indexed but referenced nowhere
+[FAIL] R22 art-9: mentioned but not in the artifacts index
+[FAIL] R13 units/group_size_four: verified unit without VALIDITY
+[FAIL] R14 units/hut_phone_ok@VALIDITY: not a canonical VALIDITY form: до 21.10.2026
+[FAIL] R13 units/route_derived: verified unit without VALIDITY
+[FAIL] R09 units/status_broken@STATUS: status not in the closed vocabulary
+[FAIL] R10 units/status_broken@PRIMACY: primacy not primary/secondary
+[FAIL] R16 veteran_tip@ORIGIN: structural date is not ISO YYYY-MM-DD: 19.10.2026
+[FAIL] R16 q2@DEADLINE: structural date is not ISO YYYY-MM-DD: 5 ноября
+[WARN] R28 root@UPDATED: UPDATED 2026-10-20 is behind the newest date in file 2026-10-21
+[FAIL] R18 edges[4]@FROM: points to a non-existing unit: new_tag
+[FAIL] R18 edges[4]@TO: points to a non-existing unit: old_tag
+[FAIL] R19 units/route_derived: verified derivation without a confirms edge from a different-origin unit
+[FAIL] R20 edges[3]: contradicts edge without a demand-registry record (protocol 11)
+[FAIL] R23 units/group_size_four@ORIGIN: token not canonical: spoken: user, chat, 2026-10-19
+[FAIL] R23 units/veteran_tip@ORIGIN: token not canonical: spoken: person=Максим, channel=чат клуба, date=19.10.2026
+[FAIL] R23 units/road_closed@ORIGIN: token not canonical: web: kdmid-example.ru/roads
+[FAIL] R24 registry/q3@BRANCH: branch missing or not in the closed vocabulary
+[FAIL] R24 registry/q6@BRANCH: branch missing or not in the closed vocabulary
+[FAIL] R25 q2@DEADLINE: deadline is not an ISO date: 5 ноября
+[WARN] R26 registry/q3: no branch and no verdict record
+[WARN] R26 registry/q6: no branch and no verdict record
+[WARN] R27 registry: id gaps: q4
+[FAIL] R30 registry/q5: convergence claimed (root@FINAL+status@COMPLETE) with a blocking question open
+summary: FAIL 22, WARN 6
