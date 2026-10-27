@@ -9,7 +9,7 @@ START_goal
 ### Goal
 Bring the picture to a state where every statement used in conclusions is either verified or explicitly marked unverified, with who will close it and how. The conveyor runs for convergence: the demand registry empties; contradictions are resolved or registered with an owner. The output is a packaged slice of verified data, sufficient for the declared action without returning to raw sources.
 
-The action is the sufficiency anchor: whatever a human builds on the data, it is declared by them and refinable in course; without a declared action the goal is undefined.
+The action is the sufficiency anchor: whatever a human builds on the data, it is declared by them, tested at entry and refinable in course; without a declared action the goal is undefined.
 END_goal
 
 START_task
@@ -24,9 +24,9 @@ Run the convergence cycle from raw input to sufficiency. The steps are the scope
 
 Input. The cycle is started by a delta: information without status, a question without an answer, or a contradiction. A human message may be of any completeness; the goal and the sufficiency criterion are set by this skill, not by the input. Any participant may start any step — a human demand becomes the input of the corresponding state.
 
-Action. Declared by the human at entry; it sets the initial composition of the demand registry and unfolds through the question "what must be known to act?". An undeclared action is the first blocking question. Refinement is human-owned — self-declared or confirming the executor's proposal: the refined action supersedes the old one with a supersedes edge in the same vector; the registry re-unfolds; verified data is inherited. The action is always singular; a composite decomposes — replacement within the vector or a new task with its own directory.
+Action. Declared by the human at entry and tested before the cycle runs (state action_check). The approved wording sets the initial composition of the demand registry and unfolds through the question "what must be known to act?"; the original wording stays as task context. A change of the action is human-decided only — self-declared or confirming the executor's proposal; the refined action passes the same test and supersedes the old one with a supersedes edge in the same vector; the registry re-unfolds; verified data is inherited. The action is always singular; a composite decomposes — replacement within the vector or a new task with its own directory.
 
-State. A graph of units, links, operations and demand (form in state_shape); it lives within the task, after it only the product matters. The graph lives in a draft file, not in dialogue: the first intake creates data-draft-<slug>.xml, every cycle pass rewrites it whole — the current state is always on disk, a dead session loses no graph. One reality, the file is its record. Data from past tasks enters only through regular intake, as new units.
+State. A graph of units, links, operations and demand (form in state_shape); it lives within the task, after it only the product matters. The graph lives in a draft file, not in dialogue: action_check creates data-draft-<slug>.xml at task start with the approved action; every cycle pass rewrites it whole — the current state is always on disk, a dead session loses no graph. One reality, the file is its record. Data from past tasks enters only through regular intake, as new units.
 END_task
 
 START_environment
@@ -54,6 +54,13 @@ START_working_patterns
 ### Working Patterns
 
 The cycle is a state machine. A state holds until its GOAL is met; between dialogue turns the executor returns to the current state by its trigger. Several states active — executed in cycle order, each to its GOAL. Moving forward without the previous state's GOAL met is an error.
+
+START_state_action_check
+State action_check — the declared action against the information criterion.
+TRIGGER: the task starts; an action is declared or awaits declaration.
+ACTION: test whether the action is informational — decided by knowledge: with an empty registry nothing remains to execute (e.g. "understand whether X is possible"); an action requiring execution in the world (e.g. "obtain X") fails the test. An undeclared or failed action is the first blocking question; propose an information wording to the human. On approval create the draft with the action; the original wording stays as task context.
+GOAL: the action is informational, human-approved and recorded in the draft. Until then the cycle holds — intake without an approved action collects in the wrong direction.
+END_state_action_check
 
 START_state_intake
 State intake.
