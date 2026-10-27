@@ -93,9 +93,34 @@ END_state_demand_delta
 START_state_package
 State package.
 TRIGGER: no blocking questions in the registry.
-ACTION: run the orphan audit (protocol 13); present readiness to the human — the draft's picture: verified units, defaults, open questions; on approval — assemble the product from verified units only (as-of units — with a pre-check at assembly time; disputed, defaults and open go to explicit sections) and write the product file.
-GOAL: the human approved the readiness; the product is assembled and its file written. Until approval the state holds; human edits are accepted as new units and pass the cycle again.
+ACTION: run the orphan audit (protocol 13); present readiness to the human — the draft's picture: verified units, defaults, open questions.
+GOAL: the human approved the readiness. Until approval the state holds; human edits are accepted as new units and pass the cycle again.
 END_state_package
+
+START_state_check
+State check — the deterministic gate.
+TRIGGER: the readiness is approved by the human.
+ACTION: run the checking script load(path="scripts/check_draft.py") on the task directory; fix mechanical findings and show the human a mini-report; repeat until a clean pass.
+GOAL: the script passes with no fail findings.
+END_state_check
+
+START_state_audit
+State audit — independent semantic verification.
+TRIGGER: the script has passed clean.
+ACTION: launch a subagent in a clean context with the prompt template below; replace the template variables with real paths (<skill-dir> — the installed skill directory, <task-dir> — the task directory .data-folds/data-fold-<slug>/):
+
+    Independent audit. Load and follow the protocol: load(path="<skill-dir>/reference/data-fold-auditor.md"). Subject: load(path="<task-dir>"). Work and report in English; report only, no edits.
+
+Present the received report to the human with your judgment on what must be fixed; the decision is the human's. Fixes pass the cycle; before a re-audit — the check state again.
+GOAL: after an audit round the human explicitly decides "assemble".
+END_state_audit
+
+START_state_assembly
+State assembly.
+TRIGGER: the human has decided "assemble".
+ACTION: final run of the script — a failure returns to check; then assemble the product from verified units only (as-of units — with a pre-check at assembly time; disputed, defaults and open go to explicit sections) and write the file.
+GOAL: the product is assembled and its file written.
+END_state_assembly
 
 START_state_freeze
 State freeze.
@@ -227,7 +252,7 @@ END_tactical_freedom
 
 START_completion_criteria
 ### Completion Criteria
-- Success: no blocking questions; contradictions resolved or registered with an owner; orphan audit clean; the human approved the readiness; the product assembled from verified units with explicit "accepted defaults" and "open" sections and written to file.
+- Success: no blocking questions; contradictions resolved or registered with an owner; orphan audit clean; the human approved the readiness; the check pipeline passed — the script clean, audit rounds triaged to the human's explicit "assemble" decision; the product assembled from verified units with explicit "accepted defaults" and "open" sections and written to file.
 - Rollback: the human rejected the readiness — accept the edits as new units, pass the cycle, present readiness again.
 - Fail-safe: demand blocked externally — the source unavailable, executing its part, or contradiction resolution blocked — freeze with a dead-end report: what is open, who blocks it, what lifts it. Freezing is a legitimate exit, not a failure.
 - Zero-context survival: the product carries full meta-markup — tags, origins, statuses, primacy, shelf lives, build date — the next executor works with it without dialogue history.
