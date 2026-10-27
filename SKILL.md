@@ -168,6 +168,14 @@ State form:
 - Edges: supersedes, contradicts, derived-from, confirms, depends-on.
 - Demand registry: open questions with a chosen fork branch, a closure owner, a date for deadlines, and closure verdict records (question form — answer substance).
 - Artifacts: any digital evidence from any side; indexed name art-<sequence-number>-<hint>.<extension>; units reference an artifact with the ARTIFACT attribute.
+- Draft form — the state file's minimal skeleton:
+  - root data_draft: TASK required; UPDATED (ISO date), CYCLE (integer), FINAL (true|false) optional;
+  - action — required: the approved action wording; SUPERSEDES — optional history of prior wordings (the action's history lives here, not in edges);
+  - units — required TYPE, ORIGIN, STATUS; verified implies PRIMACY and VALIDITY; ARTIFACT optional, a reference into the artifact index; tags snake_case, unique;
+  - edges — required, may be empty: edge TYPE="supersedes|contradicts|derived-from|confirms|depends-on" FROM TO; FROM/TO — existing unit tags only; directions: supersedes new to old, derived-from derivation to support, confirms confirming to confirmed, depends-on waiting to blocking; contradicts symmetric, direction not fixed;
+  - demand_registry — questions: id (qN, continuous, no gaps), tag, OWNER, DEADLINE (optional, ISO date); open — BRANCH="verify-myself|ask-source|accept-default", BLOCKING true|false optional; closed — VERDICT; a status element (COMPLETE, AS_OF) optional;
+  - artifacts — the index: id="art-<NN>" matching the file name, path, note optional.
+- Canonical formats: dates in structural fields — ISO YYYY-MM-DD (UPDATED, AS_OF, ORIGIN dates, DEADLINE, VALIDITY dates); ORIGIN — tokens separated by ";", each token with its own prefix: web: <URL with scheme> · spoken: person=…, channel=…, date=ISO (person/channel values — text without commas) · check: <instrument>, date=ISO · file: <path from .data-folds/>; VALIDITY — as-of | as-of:ISO date | condition: <text> | ISO date | ISO range, a parenthesized note allowed after the value; an artifact — art-<NN>-<hint>.<ext>, numbering dense, no gaps or duplicates.
 - Storage: .data-folds/ in the workspace root; each task — a data-fold-<slug>/ directory holding the draft data-draft-<slug>.xml, the product data-fold-<slug>.xml and the artifacts. The draft lives within the task; moving the task is moving the directory.
 END_state_shape
 
