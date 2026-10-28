@@ -7,6 +7,24 @@
 # Exit codes: 0 — no FAIL findings; 1 — at least one FAIL or a fatal error;
 #             2 — usage error.
 # Cross-platform: Python 3.7+ stdlib only (pathlib, re, xml.etree, datetime).
+#
+# Rule traceability (rule -> SKILL.md anchor); keep in sync with spec edits:
+#   R01 state_shape: Storage              R02 operational (UTF-8 discipline)
+#   R03 state_shape: Artifacts            R04 Draft form: artifacts index
+#   R05 Draft form + protocol 10          R06 state_shape: Artifacts
+#   R07 Draft form (well-formed XML)      R08 Draft form: root
+#   R09 state_shape: Statuses             R10 state_shape: Unit (PRIMACY)
+#   R11 protocol 1                        R12 state_shape: Unit (verified=>PRIMACY)
+#   R13 state_shape: Unit + protocol 5    R14 Canonical formats: VALIDITY
+#   R15 state_shape: Unit (snake_case)    R16 Canonical formats: ISO dates
+#   R17 state_shape: Edges                R18 Draft form: edges FROM/TO
+#   R19 protocol 2                        R20 protocol 11
+#   R21 state_shape: Artifacts (ARTIFACT) R22 state_shape: Artifacts + Draft form
+#   R23 Canonical formats: ORIGIN + protocol 1
+#   R24/R25/R26 state_shape: Demand registry (branch/owner; deadlines; verdicts)
+#   R27 Draft form (qN continuous) + protocol 10
+#   R28 Draft form: UPDATED + operational freshness
+#   R29 Draft form: action                R30 package TRIGGER + Success (convergence)
 
 import datetime
 import re
