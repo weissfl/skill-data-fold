@@ -24,7 +24,7 @@ Run the convergence cycle from raw input to sufficiency. The steps are the scope
 
 Input. The cycle is started by a delta: information without status, a question without an answer, or a contradiction. A human message may be of any completeness; the goal and the sufficiency criterion are set by this skill, not by the input. Any participant may start any step — a human demand becomes the input of the corresponding state.
 
-Action. Declared by the human at entry and tested before the cycle runs (state action_check). The approved wording sets the initial composition of the demand registry and unfolds through the question "what must be known to act?"; the original wording stays as task context. A change of the action is human-decided only — self-declared or confirming the executor's proposal; the refined action passes the same test and supersedes the old one with a supersedes edge in the same vector; the registry re-unfolds; verified data is inherited. The action is always singular; a composite decomposes — replacement within the vector or a new task with its own directory.
+Action. Declared by the human at entry and tested before the cycle runs (state action_check). The approved wording unfolds into the initial registry composition in state demand_seed; the original wording stays as task context. A change of the action is human-decided only — self-declared or confirming the executor's proposal; the refined action passes the same test and supersedes the old one with a supersedes edge in the same vector; the registry unfolds anew through demand_seed; verified data is inherited. The action is always singular; a composite decomposes — replacement within the vector or a new task with its own directory.
 
 State. A graph of units, links, operations and demand (form in state_shape); it lives within the task, after it only the product matters. The graph lives in a draft file, not in dialogue: action_check creates data-draft-<slug>.xml at task start with the approved action; every cycle pass rewrites it whole — the current state is always on disk, a dead session loses no graph. One reality, the file is its record. Data from past tasks enters only through regular intake, as new units.
 END_task
@@ -59,8 +59,15 @@ START_state_action_check
 State action_check — the declared action against the information criterion.
 TRIGGER: the task starts; an action is declared or awaits declaration.
 ACTION: test whether the action is informational — decided by knowledge: with an empty registry nothing remains to execute (e.g. "understand whether X is possible"); an action requiring execution in the world (e.g. "obtain X") fails the test. An undeclared or failed action is the first blocking question; propose an information wording to the human. On approval create the draft with the action; the original wording stays as task context.
-GOAL: the action is informational, human-approved and recorded in the draft. Until then the cycle holds — intake without an approved action collects in the wrong direction.
+GOAL: the action is informational, human-approved and recorded in the draft. Until then the cycle holds — without an approved action there is nothing to unfold.
 END_state_action_check
+
+START_state_demand_seed
+State demand_seed — the initial composition of the demand registry.
+TRIGGER: the action is approved or refined.
+ACTION: ask the human first: what is already known, what must be found out, where to look. Then unfold the action through the question "what must be known to act?"; merge the seed and the unfold, each extending the other; mark every question's provenance — SEED="human|executor". The known from the seed becomes portions for intake. Present the registry composition to the human with question owners.
+GOAL: the human approved the initial registry composition. Until then intake does not run — collection without an approved composition is incomplete.
+END_state_demand_seed
 
 START_state_intake
 State intake.
@@ -198,7 +205,7 @@ State form:
   - action — required: the approved action wording; SUPERSEDES — optional history of prior wordings (the action's history lives here, not in edges);
   - units — required TYPE, ORIGIN, STATUS; verified implies PRIMACY and VALIDITY; ARTIFACT optional, a reference into the artifact index; tags snake_case, unique;
   - edges — required, may be empty: edge TYPE="supersedes|contradicts|derived-from|confirms|depends-on" FROM TO; FROM/TO — existing unit tags only; directions: supersedes new to old, derived-from derivation to support, confirms confirming to confirmed, depends-on waiting to blocking; contradicts symmetric, direction not fixed;
-  - demand_registry — questions: id (qN, continuous, no gaps), tag, OWNER, DEADLINE (optional, ISO date); open — BRANCH="verify-myself|ask-source|accept-default", BLOCKING true|false optional; closed — VERDICT; a status element (COMPLETE, AS_OF) optional;
+  - demand_registry — questions: id (qN, continuous, no gaps), tag, OWNER, DEADLINE (optional, ISO date), SEED="human|executor" (optional provenance); open — BRANCH="verify-myself|ask-source|accept-default", BLOCKING true|false optional; closed — VERDICT; a status element (COMPLETE, AS_OF) optional;
   - artifacts — the index: id="art-<NN>" matching the file name, path, note optional.
 - Canonical formats: dates in structural fields — ISO YYYY-MM-DD (UPDATED, AS_OF, ORIGIN dates, DEADLINE, VALIDITY dates); ORIGIN — tokens separated by ";", each token with its own prefix: web: <URL with scheme> · spoken: person=…, channel=…, date=ISO (person/channel values — text without commas) · check: <instrument>, date=ISO · file: <path from .data-folds/>; VALIDITY — as-of | as-of:ISO date | condition: <text> | ISO date | ISO range, a parenthesized note allowed after the value; an artifact — art-<NN>-<hint>.<ext>, numbering dense, no gaps or duplicates.
 - Storage: .data-folds/ in the workspace root; each task — a data-fold-<slug>/ directory holding the draft data-draft-<slug>.xml, the product data-fold-<slug>.xml and the artifacts. The draft lives within the task; moving the task is moving the directory.
@@ -252,7 +259,7 @@ END_tactical_freedom
 
 START_completion_criteria
 ### Completion Criteria
-- Success: no blocking questions; contradictions resolved or registered with an owner; orphan audit clean; the human approved the readiness; the check pipeline passed — the script clean, audit rounds triaged to the human's explicit "assemble" decision; the product assembled from verified units with explicit "accepted defaults" and "open" sections and written to file.
+- Success: no blocking questions; the initial registry composition human-approved; contradictions resolved or registered with an owner; orphan audit clean; the human approved the readiness; the check pipeline passed — the script clean, audit rounds triaged to the human's explicit "assemble" decision; the product assembled from verified units with explicit "accepted defaults" and "open" sections and written to file.
 - Rollback: the human rejected the readiness — accept the edits as new units, pass the cycle, present readiness again.
 - Fail-safe: demand blocked externally — the source unavailable, executing its part, or contradiction resolution blocked — freeze with a dead-end report: what is open, who blocks it, what lifts it. Freezing is a legitimate exit, not a failure.
 - Zero-context survival: the product carries full meta-markup — tags, origins, statuses, primacy, shelf lives, build date — the next executor works with it without dialogue history.
