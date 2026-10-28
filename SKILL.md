@@ -139,7 +139,7 @@ END_state_freeze
 START_protocols
 Protocols. A protocol violation is an error, not an acceptable execution variant.
 
-1. Origin is mandatory. Each unit carries source, time and channel; a derivation also its supports. A unit without origin participates in no conclusion and never enters the product. The origin link is resolvable: web — the primary-source URL (fetched content saved as a snapshot artifact, referenced as the URL + path pair); file — a path relative to .data-folds/; spoken remark — channel, person, date; check — instrument and date, reproducible. A name pointing nowhere is a forbidden form.
+1. Origin is mandatory. Each unit carries source, time and channel; a derivation also its supports. A unit without origin participates in no conclusion and never enters the product. The origin link is resolvable: web — the primary-source URL (fetched content saved as a snapshot artifact, referenced as the URL + path pair); file — a path relative to .data-folds/; spoken remark — channel, person, date (the portion is saved verbatim as an artifact at arrival, the unit references the origin+artifact pair — as with web snapshots); check — instrument and date, reproducible. A name pointing nowhere is a forbidden form.
 Rationale: an originless statement looks like a fact and slips into decisions; an origin that cannot be re-read by its link cannot be checked — an unverifiable origin equals no origin.
 
 2. Derived is not fact. A derivation unit does not get "verified" until it receives independent confirmation — a confirms edge from another source or instrument.
@@ -203,7 +203,7 @@ State form:
 - Draft form — the state file's minimal skeleton:
   - root data_draft: TASK required; UPDATED (ISO date), CYCLE (integer), FINAL (true|false) optional;
   - action — required: the approved action wording; SUPERSEDES — optional history of prior wordings (the action's history lives here, not in edges);
-  - units — required TYPE, ORIGIN, STATUS; verified implies PRIMACY and VALIDITY; ARTIFACT optional, a reference into the artifact index; tags snake_case, unique;
+  - units — required TYPE, ORIGIN, STATUS; verified implies PRIMACY and VALIDITY; ARTIFACT — a reference into the artifact index, required for spoken and web origins; tags snake_case, unique;
   - edges — required, may be empty: edge TYPE="supersedes|contradicts|derived-from|confirms|depends-on" FROM TO; FROM/TO — existing unit tags only; directions: supersedes new to old, derived-from derivation to support, confirms confirming to confirmed, depends-on waiting to blocking; contradicts symmetric, direction not fixed;
   - demand_registry — questions: id (qN, continuous, no gaps), tag, OWNER, DEADLINE (optional, ISO date), SEED="human|executor" (optional provenance); open — BRANCH="verify-myself|ask-source|accept-default", BLOCKING true|false optional; closed — VERDICT; a status element (COMPLETE, AS_OF) optional;
   - artifacts — the index: id="art-<NN>" matching the file name, path, note optional.

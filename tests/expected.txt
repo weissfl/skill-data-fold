@@ -16,6 +16,11 @@
 [FAIL] R18 edges[4]@TO: points to a non-existing unit: old_tag
 [FAIL] R19 units/route_derived: verified derivation without a confirms edge from a different-origin unit
 [FAIL] R20 edges[3]: contradicts edge without a demand-registry record (protocol 11)
+[FAIL] R31 units/group_size_four: spoken origin without a resolvable ARTIFACT — portion not saved verbatim
+[FAIL] R32 units/route_derived: web origin without a resolvable ARTIFACT — snapshot not saved
+[FAIL] R31 units/veteran_tip: spoken origin without a resolvable ARTIFACT — portion not saved verbatim
+[FAIL] R32 units/status_broken: web origin without a resolvable ARTIFACT — snapshot not saved
+[FAIL] R32 units/road_closed: web origin without a resolvable ARTIFACT — snapshot not saved
 [FAIL] R23 units/group_size_four@ORIGIN: token not canonical: spoken: user, chat, 2026-10-19
 [FAIL] R23 units/veteran_tip@ORIGIN: token not canonical: spoken: person=Максим, channel=чат клуба, date=19.10.2026
 [FAIL] R23 units/road_closed@ORIGIN: token not canonical: web: kdmid-example.ru/roads
@@ -26,4 +31,4 @@
 [WARN] R26 registry/q6: no branch and no verdict record
 [WARN] R27 registry: id gaps: q4
 [FAIL] R30 registry/q5: convergence claimed (root@FINAL+status@COMPLETE) with a blocking question open
-summary: FAIL 22, WARN 6
+summary: FAIL 27, WARN 6

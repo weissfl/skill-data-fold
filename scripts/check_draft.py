@@ -25,6 +25,8 @@
 #   R27 Draft form (qN continuous) + protocol 10
 #   R28 Draft form: UPDATED + operational freshness
 #   R29 Draft form: action                R30 package TRIGGER + Success (convergence)
+#   R31 protocol 1 (spoken portion pair) + Draft form
+#   R32 protocol 1 (web snapshot pair) + Draft form
 
 import datetime
 import re
@@ -317,6 +319,16 @@ def check(m):
             mm = ART_TOKEN_RE.search(av)
             if not mm or (mm.group(1).lstrip("0") or "0") not in idx:
                 out.append(F("R21", "units/%s@ARTIFACT" % u.tag, "does not resolve into the artifacts index"))
+
+    # R31/R32 spoken and web origins require a resolvable portion/snapshot artifact
+    for u in m["unit_list"]:
+        o, av = u.get("ORIGIN", ""), u.get("ARTIFACT", "")
+        mm = ART_TOKEN_RE.search(av)
+        resolves = bool(mm) and (mm.group(1).lstrip("0") or "0") in idx
+        if re.search(r"(?:^|;\s*)spoken:", o) and not resolves:
+            out.append(F("R31", "units/%s" % u.tag, "spoken origin without a resolvable ARTIFACT — portion not saved verbatim"))
+        if re.search(r"(?:^|;\s*)web:", o) and not resolves:
+            out.append(F("R32", "units/%s" % u.tag, "web origin without a resolvable ARTIFACT — snapshot not saved"))
 
     # R23 ORIGIN grammar
     for u in m["unit_list"]:

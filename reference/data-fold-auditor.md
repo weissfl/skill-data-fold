@@ -30,6 +30,7 @@ Checklist (meaning, not form) — a mandatory minimum, not a boundary: a defect 
 8. Origin resolvability: the origin leads to a checkable primary source; "a retelling of a retelling", a bare domain without a path — a finding.
 9. Clarity without history: TYPE is meaningful for the case; an annotation reads for a reader who has not seen the dialogue.
 10. Convergence consistency: completion claimed (FINAL/COMPLETE) — no blocking questions; the draft's statements do not contradict each other.
+11. Coverage completeness: every substantive claim of each artifact has its unit.
 
 Report form.
 Criticality — a raw rating on a 1-10 scale: 10 — destroys trust in the whole picture, 1 — cosmetics; no preset ranges or categories.

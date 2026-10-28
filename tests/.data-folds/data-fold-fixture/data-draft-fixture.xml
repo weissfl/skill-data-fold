@@ -7,7 +7,7 @@
     <weather_ok TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="web: https://weather.example/weekend" ARTIFACT="art-001-weather.md">Осадков не прогнозируется; снапшот сохранён при intake.</weather_ok>
     <group_size_four TYPE="participant-words" STATUS="verified" PRIMACY="primary" ORIGIN="spoken: user, chat, 2026-10-19">Нас четверо.</group_size_four>
     <hut_phone_ok TYPE="fact" STATUS="verified" PRIMACY="secondary" VALIDITY="до 21.10.2026" ORIGIN="web: https://travel-blog.example/hut" ARTIFACT="art-002-hut.md">Хижина принимает бронь по телефону; записка путешественника.</hut_phone_ok>
-    <hut_owner_reply TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="spoken: person=Смотритель, channel=phone, date=2026-10-20">Смотритель подтвердил бронь по телефону на месте.</hut_owner_reply>
+    <hut_owner_reply TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="spoken: person=Смотритель, channel=phone, date=2026-10-20" ARTIFACT="art-007-portion-watch.md">Смотритель подтвердил бронь по телефону на месте.</hut_owner_reply>
     <route_derived TYPE="pattern" STATUS="verified" PRIMACY="primary" ORIGIN="web: https://maps.example/route">Вывод: маршрут подъёма по силам группе из четырёх.</route_derived>
     <fee_changed TYPE="fact" STATUS="verified" PRIMACY="primary" VALIDITY="as-of:2026-10-20" ORIGIN="web: https://park.example/fees" ARTIFACT="art-004-fees.md">Сбор вырос до 20 USD.</fee_changed>
     <veteran_tip TYPE="fact" STATUS="verified" PRIMACY="secondary" VALIDITY="as-of" ORIGIN="spoken: person=Максим, channel=чат клуба, date=19.10.2026">Совет бывалого: начинать до жары.</veteran_tip>
@@ -38,6 +38,7 @@
     <art id="art-004" path="art-004-fees.md" note="страница сборов"/>
     <art id="art-005" path="art-005-notes.md"/>
     <art id="art-006" path="snap.txt"/>
+    <art id="art-007" path="art-007-portion-watch.md" note="устная порция дословно"/>
   </artifacts>
 
 </data_draft>
